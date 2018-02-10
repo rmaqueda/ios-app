@@ -1,5 +1,5 @@
 //
-//  AuthVC.swift
+//  ChannelsVC.swift
 //  app
 //
 //  Created by Максим Ефимов on 10.02.2018.
@@ -8,14 +8,8 @@
 
 import UIKit
 
-class AuthVC : UIViewController {
+class CnannelsVC : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidAppear")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("viewDidAppear")
     }
 }

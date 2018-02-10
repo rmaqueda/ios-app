@@ -17,12 +17,14 @@
 		F0FF7166202E975800CCB4DC /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7165202E975800CCB4DC /* UIViewController.swift */; };
 		F0FF7169202E985000CCB4DC /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7168202E985000CCB4DC /* SearchVC.swift */; };
 		F0FF716B202ECA9B00CCB4DC /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF716A202ECA9B00CCB4DC /* UIView.swift */; };
-		F0FF716D202ECB3C00CCB4DC /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF716C202ECB3C00CCB4DC /* AuthVC.swift */; };
 		F0FF716F202ECCE800CCB4DC /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF716E202ECCE800CCB4DC /* UIImageView.swift */; };
 		F0FF7172202EDAC100CCB4DC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7171202EDAC100CCB4DC /* User.swift */; };
 		F0FF7174202EDE6400CCB4DC /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7173202EDE6400CCB4DC /* UserData.swift */; };
 		F0FF7176202EE8EE00CCB4DC /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7175202EE8EE00CCB4DC /* UIFont.swift */; };
 		F0FF7178202EF17600CCB4DC /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7177202EF17600CCB4DC /* UIColor.swift */; };
+		F0FF717A202F118000CCB4DC /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7179202F118000CCB4DC /* UserVC.swift */; };
+		F0FF717C202F312100CCB4DC /* ChannelsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF717B202F312100CCB4DC /* ChannelsVC.swift */; };
+		F0FF717F202F34D200CCB4DC /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF717E202F34D200CCB4DC /* PostCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,12 +42,14 @@
 		F0FF7165202E975800CCB4DC /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		F0FF7168202E985000CCB4DC /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		F0FF716A202ECA9B00CCB4DC /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		F0FF716C202ECB3C00CCB4DC /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
 		F0FF716E202ECCE800CCB4DC /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		F0FF7171202EDAC100CCB4DC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F0FF7173202EDE6400CCB4DC /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		F0FF7175202EE8EE00CCB4DC /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		F0FF7177202EF17600CCB4DC /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		F0FF7179202F118000CCB4DC /* UserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
+		F0FF717B202F312100CCB4DC /* ChannelsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsVC.swift; sourceTree = "<group>"; };
+		F0FF717E202F34D200CCB4DC /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,7 @@
 		F0FF714D202E7FAB00CCB4DC /* app */ = {
 			isa = PBXGroup;
 			children = (
+				F0FF717D202F34C500CCB4DC /* Views */,
 				F0FF7164202E974200CCB4DC /* Extensions */,
 				F0FF7170202EDAB600CCB4DC /* Models */,
 				F0FF7167202E97D800CCB4DC /* ViewControllers */,
@@ -129,7 +134,8 @@
 				F0FF7162202E96E700CCB4DC /* NewsVC.swift */,
 				F0FF7160202E96BA00CCB4DC /* NavigationVC.swift */,
 				F0FF7168202E985000CCB4DC /* SearchVC.swift */,
-				F0FF716C202ECB3C00CCB4DC /* AuthVC.swift */,
+				F0FF7179202F118000CCB4DC /* UserVC.swift */,
+				F0FF717B202F312100CCB4DC /* ChannelsVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -140,6 +146,14 @@
 				F0FF7171202EDAC100CCB4DC /* User.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F0FF717D202F34C500CCB4DC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F0FF717E202F34D200CCB4DC /* PostCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,17 +284,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0FF717C202F312100CCB4DC /* ChannelsVC.swift in Sources */,
 				F0FF7169202E985000CCB4DC /* SearchVC.swift in Sources */,
 				F0FF716F202ECCE800CCB4DC /* UIImageView.swift in Sources */,
 				F0FF7161202E96BA00CCB4DC /* NavigationVC.swift in Sources */,
-				F0FF716D202ECB3C00CCB4DC /* AuthVC.swift in Sources */,
 				F0FF7163202E96E700CCB4DC /* NewsVC.swift in Sources */,
 				F0FF7174202EDE6400CCB4DC /* UserData.swift in Sources */,
 				F0FF716B202ECA9B00CCB4DC /* UIView.swift in Sources */,
 				F0FF7151202E7FAB00CCB4DC /* PostVC.swift in Sources */,
 				F0FF7176202EE8EE00CCB4DC /* UIFont.swift in Sources */,
+				F0FF717F202F34D200CCB4DC /* PostCell.swift in Sources */,
 				F0FF7178202EF17600CCB4DC /* UIColor.swift in Sources */,
 				F0FF714F202E7FAB00CCB4DC /* AppDelegate.swift in Sources */,
+				F0FF717A202F118000CCB4DC /* UserVC.swift in Sources */,
 				F0FF7172202EDAC100CCB4DC /* User.swift in Sources */,
 				F0FF7166202E975800CCB4DC /* UIViewController.swift in Sources */,
 			);
