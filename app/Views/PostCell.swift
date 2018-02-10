@@ -21,7 +21,7 @@ class PostCell : UICollectionViewCell {
         var view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
-        view.load("https://meduza.io/image/attachments/images/002/803/995/large/_bku3gwV6AsvLEIkLQtHqA.jpg")
+        view.backgroundColor = UIColor.lightGray
         view.layer.cornerRadius = 10
         return view
     }()
@@ -29,7 +29,6 @@ class PostCell : UICollectionViewCell {
     var text: UITextView = {
         var view = UITextView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "asdfsadf asdk fjklsaj dflksjad fsad fj fadshjfjkasdhf jksadj klasdjf klasdj"
         view.isEditable = false
         view.isScrollEnabled = false
         view.backgroundColor = .clear

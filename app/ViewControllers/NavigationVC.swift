@@ -38,7 +38,7 @@ class NavigationVC: UITabBarController, UITabBarControllerDelegate {
         
         
         // 2
-        let tabTwo = UINavigationController(rootViewController: SearchVC())
+        let tabTwo = UINavigationController(rootViewController: SearchVC(UserData.instance.user!))
         let tabTwoBarItem2 = UITabBarItem(title: "Tab 2", image: UIImage(named: "defaultImage2.png"), selectedImage: UIImage(named: "selectedImage2.png"))
         
         tabTwo.tabBarItem = tabTwoBarItem2

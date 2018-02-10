@@ -1,11 +1,17 @@
 import UIKit
 import WebKit
 class PostVC: UIViewController, WKUIDelegate, WKNavigationDelegate {
-    let url: String!
+    let post: Post!
     var webView: WKWebView!
+    let loadingIndicator : UIActivityIndicatorView = {
+        var view = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.startAnimating()
+        return view
+    }()
     
-    init(_ url : String) {
-        self.url = url
+    init(_ post : Post) {
+        self.post = post
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -18,11 +24,16 @@ class PostVC: UIViewController, WKUIDelegate, WKNavigationDelegate {
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
         view = webView
+        view.addSubview(loadingIndicator)
+        loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        let commentsButton = UIBarButtonItem(title: "Комментарии", style: .plain, target: self, action: #selector(searchButtonAction))
+        navigationItem.rightBarButtonItem = commentsButton
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let myURL = URL(string: url)
+        let myURL = URL(string: post.url)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
         webView.navigationDelegate = self
@@ -30,6 +41,7 @@ class PostVC: UIViewController, WKUIDelegate, WKNavigationDelegate {
     
     func webView(_: WKWebView, didCommit: WKNavigation!) {
         print("didCommit", webView.url!)
+        loadingIndicator.stopAnimating()
     }
     
     func webView(_: WKWebView, didStartProvisionalNavigation: WKNavigation!) {

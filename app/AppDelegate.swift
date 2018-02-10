@@ -80,8 +80,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let last_name = UserDefaults.standard.string(forKey: "last_name")
             let username = UserDefaults.standard.string(forKey: "username")
             let photo_url = UserDefaults.standard.string(forKey: "photo_url")
+            let sex = UserDefaults.standard.string(forKey: "sex")
+            let about = UserDefaults.standard.string(forKey: "about")
+            let prof = UserDefaults.standard.string(forKey: "prof")
+            let age = UserDefaults.standard.string(forKey: "age")
             
-            let user = User(id: id, first_name: first_name, last_name: last_name, username: username, photo_url: photo_url)
+            let user = User(id: id, first_name: first_name, last_name: last_name, username: username, photo_url: photo_url, sex: sex, age: age, prof: prof, about: about)
             UserData.instance.user = user
             UserData.instance.hash = hash
             window = UIWindow(frame: UIScreen.main.bounds)
