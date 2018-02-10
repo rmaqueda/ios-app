@@ -31,13 +31,13 @@ class NewsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         
         layout.sectionHeadersPinToVisibleBounds = true
         layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-        layout.minimumInteritemSpacing = 2
-        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 100
+        layout.minimumLineSpacing = 10
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.register(CardCell.self, forCellWithReuseIdentifier: cardCellIdentifier)
+        collectionView.register(PostCell.self, forCellWithReuseIdentifier: cardCellIdentifier)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -65,24 +65,48 @@ class NewsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as! CardCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as! PostCell
+        cell.isUserInteractionEnabled = true
+        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(postClickAction)))
         return cell
+    }
+    
+    @objc func postClickAction(){
+        show(PostVC("http://telegra.ph/api"), sender: self)
     }
 }
 
 
-class CardCell : UICollectionViewCell {
+class PostCell : UICollectionViewCell {
     var cardView : UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
-        view.layer.cornerRadius = 18
+        view.layer.cornerRadius = 10
         return view
     }()
     
-    var imageView: UIImageView = {
+    var image: UIImageView = {
         var view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.load("https://meduza.io/image/attachments/images/002/803/995/large/_bku3gwV6AsvLEIkLQtHqA.jpg")
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    
+    var text: UITextView = {
+        var view = UITextView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = "asdfsadf asdk fjklsaj dflksjad fsad fj fadshjfjkasdhf jksadj klasdjf klasdj"
+        view.isEditable = false
+        view.isScrollEnabled = false
+        view.backgroundColor = .clear
+        view.textColor = .white
+        view.textContainer.lineFragmentPadding = 0
+        view.textContainerInset = .zero
+        view.font = .bold18
+        view.isSelectable = false
         return view
     }()
     /*
@@ -163,6 +187,7 @@ class CardCell : UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         cardView.shadow(elevation: 2)
+        
         //recordButton.makeCircle()
         //photoView.makeCircle()
     }
@@ -173,6 +198,8 @@ class CardCell : UICollectionViewCell {
     
     func setupViews(){
         addSubview(cardView)
+        cardView.addSubview(image)
+        cardView.addSubview(text)
         /*cardView.addSubview(moreButton)
         cardView.addSubview(likeButton)
         cardView.addSubview(unlikeButton)
@@ -188,6 +215,14 @@ class CardCell : UICollectionViewCell {
         cardView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         cardView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
+        image.leadingAnchor.constraint(equalTo: cardView.leadingAnchor).isActive = true
+        image.topAnchor.constraint(equalTo: cardView.topAnchor).isActive = true
+        image.trailingAnchor.constraint(equalTo: cardView.trailingAnchor).isActive = true
+        image.bottomAnchor.constraint(equalTo: cardView.bottomAnchor).isActive = true
+        
+        text.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 10).isActive = true
+        text.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10).isActive = true
+        text.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10).isActive = true
         /*
         moreButton.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 10).isActive = true
         moreButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10).isActive = true

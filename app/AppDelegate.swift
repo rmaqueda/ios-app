@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         print("application")
         start()
+        UIApplication.shared.statusBarStyle = .lightContent
         //window = UIWindow(frame: UIScreen.main.bounds)
         //window?.makeKeyAndVisible()
         //window?.rootViewController = AuthVC()
@@ -90,6 +91,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             UIApplication.shared.open(URL(string: "http://pluma.me/signin")!, options: [:], completionHandler: nil)
         }
+    }
+    
+    
+    func logout() {
+        UserDefaults.standard.removeObject(forKey: "id")
+        UserDefaults.standard.removeObject(forKey: "first_name")
+        UserDefaults.standard.removeObject(forKey: "last_name")
+        UserDefaults.standard.removeObject(forKey: "username")
+        UserDefaults.standard.removeObject(forKey: "hash")
+        UserDefaults.standard.removeObject(forKey: "photo_url")
     }
 }
 

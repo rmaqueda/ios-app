@@ -1,8 +1,17 @@
 import UIKit
 import WebKit
-class LoginVC: UIViewController, WKUIDelegate, WKNavigationDelegate {
-    
+class PostVC: UIViewController, WKUIDelegate, WKNavigationDelegate {
+    let url: String!
     var webView: WKWebView!
+    
+    init(_ url : String) {
+        self.url = url
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
@@ -13,7 +22,7 @@ class LoginVC: UIViewController, WKUIDelegate, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let myURL = URL(string: "http://pluma.me/signin")
+        let myURL = URL(string: url)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
         webView.navigationDelegate = self

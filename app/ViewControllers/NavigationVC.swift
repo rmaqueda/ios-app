@@ -20,10 +20,16 @@ class NavigationVC: UITabBarController, UITabBarControllerDelegate {
             print("photo_url", UserData.instance.user!.photo_url ?? "")
         }
         delegate = self
+        setupViews()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    func setupViews(){
+        UINavigationBar.appearance().barTintColor = .main
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+        
+        self.tabBar.tintColor = .main
+        
         
         // 1
         let tabOne = UINavigationController(rootViewController: NewsVC())
