@@ -11,6 +11,15 @@
 		F0FF7151202E7FAB00CCB4DC /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7150202E7FAB00CCB4DC /* LoginVC.swift */; };
 		F0FF7156202E7FAB00CCB4DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0FF7155202E7FAB00CCB4DC /* Assets.xcassets */; };
 		F0FF7159202E7FAB00CCB4DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0FF7157202E7FAB00CCB4DC /* LaunchScreen.storyboard */; };
+		F0FF7161202E96BA00CCB4DC /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7160202E96BA00CCB4DC /* NavigationVC.swift */; };
+		F0FF7163202E96E700CCB4DC /* NewsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7162202E96E700CCB4DC /* NewsVC.swift */; };
+		F0FF7166202E975800CCB4DC /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7165202E975800CCB4DC /* UIViewController.swift */; };
+		F0FF7169202E985000CCB4DC /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7168202E985000CCB4DC /* SearchVC.swift */; };
+		F0FF716B202ECA9B00CCB4DC /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF716A202ECA9B00CCB4DC /* UIView.swift */; };
+		F0FF716D202ECB3C00CCB4DC /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF716C202ECB3C00CCB4DC /* AuthVC.swift */; };
+		F0FF716F202ECCE800CCB4DC /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF716E202ECCE800CCB4DC /* UIImageView.swift */; };
+		F0FF7172202EDAC100CCB4DC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7171202EDAC100CCB4DC /* User.swift */; };
+		F0FF7174202EDE6400CCB4DC /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7173202EDE6400CCB4DC /* UserData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +29,15 @@
 		F0FF7155202E7FAB00CCB4DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F0FF7158202E7FAB00CCB4DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F0FF715A202E7FAB00CCB4DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F0FF7160202E96BA00CCB4DC /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
+		F0FF7162202E96E700CCB4DC /* NewsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsVC.swift; sourceTree = "<group>"; };
+		F0FF7165202E975800CCB4DC /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		F0FF7168202E985000CCB4DC /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		F0FF716A202ECA9B00CCB4DC /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		F0FF716C202ECB3C00CCB4DC /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
+		F0FF716E202ECCE800CCB4DC /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		F0FF7171202EDAC100CCB4DC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F0FF7173202EDE6400CCB4DC /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,13 +70,46 @@
 		F0FF714D202E7FAB00CCB4DC /* app */ = {
 			isa = PBXGroup;
 			children = (
+				F0FF7170202EDAB600CCB4DC /* Models */,
+				F0FF7167202E97D800CCB4DC /* ViewControllers */,
+				F0FF7164202E974200CCB4DC /* Extensions */,
 				F0FF714E202E7FAB00CCB4DC /* AppDelegate.swift */,
-				F0FF7150202E7FAB00CCB4DC /* LoginVC.swift */,
 				F0FF7155202E7FAB00CCB4DC /* Assets.xcassets */,
 				F0FF7157202E7FAB00CCB4DC /* LaunchScreen.storyboard */,
 				F0FF715A202E7FAB00CCB4DC /* Info.plist */,
+				F0FF7173202EDE6400CCB4DC /* UserData.swift */,
 			);
 			path = app;
+			sourceTree = "<group>";
+		};
+		F0FF7164202E974200CCB4DC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F0FF7165202E975800CCB4DC /* UIViewController.swift */,
+				F0FF716A202ECA9B00CCB4DC /* UIView.swift */,
+				F0FF716E202ECCE800CCB4DC /* UIImageView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F0FF7167202E97D800CCB4DC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F0FF7150202E7FAB00CCB4DC /* LoginVC.swift */,
+				F0FF7162202E96E700CCB4DC /* NewsVC.swift */,
+				F0FF7160202E96BA00CCB4DC /* NavigationVC.swift */,
+				F0FF7168202E985000CCB4DC /* SearchVC.swift */,
+				F0FF716C202ECB3C00CCB4DC /* AuthVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F0FF7170202EDAB600CCB4DC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F0FF7171202EDAC100CCB4DC /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,8 +183,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0FF7169202E985000CCB4DC /* SearchVC.swift in Sources */,
+				F0FF716F202ECCE800CCB4DC /* UIImageView.swift in Sources */,
+				F0FF7161202E96BA00CCB4DC /* NavigationVC.swift in Sources */,
+				F0FF716D202ECB3C00CCB4DC /* AuthVC.swift in Sources */,
+				F0FF7163202E96E700CCB4DC /* NewsVC.swift in Sources */,
+				F0FF7174202EDE6400CCB4DC /* UserData.swift in Sources */,
+				F0FF716B202ECA9B00CCB4DC /* UIView.swift in Sources */,
 				F0FF7151202E7FAB00CCB4DC /* LoginVC.swift in Sources */,
 				F0FF714F202E7FAB00CCB4DC /* AppDelegate.swift in Sources */,
+				F0FF7172202EDAC100CCB4DC /* User.swift in Sources */,
+				F0FF7166202E975800CCB4DC /* UIViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
