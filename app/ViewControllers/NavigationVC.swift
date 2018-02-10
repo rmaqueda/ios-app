@@ -33,7 +33,7 @@ class NavigationVC: UITabBarController, UITabBarControllerDelegate {
         
         // 1
         let tabOne = UINavigationController(rootViewController: NewsVC())
-        let tabOneBarItem = UITabBarItem(title: "News", image: UIImage(named: "defaultImage.png"), selectedImage: UIImage(named: "selectedImage.png"))
+        let tabOneBarItem = UITabBarItem(title: "News", image: #imageLiteral(resourceName: "news"), selectedImage: UIImage(named: "selectedImage.png"))
         tabOne.tabBarItem = tabOneBarItem
         
         

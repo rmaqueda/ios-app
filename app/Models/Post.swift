@@ -29,10 +29,12 @@ class Post {
     var url : String!
     var imgUrl : String?
     var title : String!
+    var comments: [Comment]?
     
-    init (url : String, imgUrl: String?, title: String){
+    init (url : String, imgUrl: String?, title: String, comments: [Comment]?){
         self.url = url
         self.imgUrl = imgUrl
         self.title = title
+        self.comments = comments
     }
 }

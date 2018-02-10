@@ -27,6 +27,8 @@
 		F0FF717F202F34D200CCB4DC /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF717E202F34D200CCB4DC /* PostCell.swift */; };
 		F0FF7181202F380F00CCB4DC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7180202F380F00CCB4DC /* Post.swift */; };
 		F0FF7183202F600900CCB4DC /* UserEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7182202F600900CCB4DC /* UserEditVC.swift */; };
+		F0FF7185202F6A5500CCB4DC /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7184202F6A5500CCB4DC /* CommentsVC.swift */; };
+		F0FF7187202F6AD800CCB4DC /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF7186202F6AD800CCB4DC /* Comment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		F0FF717E202F34D200CCB4DC /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		F0FF7180202F380F00CCB4DC /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F0FF7182202F600900CCB4DC /* UserEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEditVC.swift; sourceTree = "<group>"; };
+		F0FF7184202F6A5500CCB4DC /* CommentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
+		F0FF7186202F6AD800CCB4DC /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,7 @@
 				F0FF7179202F118000CCB4DC /* UserVC.swift */,
 				F0FF717B202F312100CCB4DC /* ChannelsVC.swift */,
 				F0FF7182202F600900CCB4DC /* UserEditVC.swift */,
+				F0FF7184202F6A5500CCB4DC /* CommentsVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 			children = (
 				F0FF7171202EDAC100CCB4DC /* User.swift */,
 				F0FF7180202F380F00CCB4DC /* Post.swift */,
+				F0FF7186202F6AD800CCB4DC /* Comment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -298,6 +304,7 @@
 				F0FF7163202E96E700CCB4DC /* NewsVC.swift in Sources */,
 				F0FF7174202EDE6400CCB4DC /* UserData.swift in Sources */,
 				F0FF716B202ECA9B00CCB4DC /* UIView.swift in Sources */,
+				F0FF7185202F6A5500CCB4DC /* CommentsVC.swift in Sources */,
 				F0FF7151202E7FAB00CCB4DC /* PostVC.swift in Sources */,
 				F0FF7176202EE8EE00CCB4DC /* UIFont.swift in Sources */,
 				F0FF717F202F34D200CCB4DC /* PostCell.swift in Sources */,
@@ -305,6 +312,7 @@
 				F0FF7181202F380F00CCB4DC /* Post.swift in Sources */,
 				F0FF714F202E7FAB00CCB4DC /* AppDelegate.swift in Sources */,
 				F0FF717A202F118000CCB4DC /* UserVC.swift in Sources */,
+				F0FF7187202F6AD800CCB4DC /* Comment.swift in Sources */,
 				F0FF7172202EDAC100CCB4DC /* User.swift in Sources */,
 				F0FF7166202E975800CCB4DC /* UIViewController.swift in Sources */,
 			);

@@ -27,9 +27,15 @@ class PostVC: UIViewController, WKUIDelegate, WKNavigationDelegate {
         view.addSubview(loadingIndicator)
         loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        let commentsButton = UIBarButtonItem(title: "Комментарии", style: .plain, target: self, action: #selector(searchButtonAction))
+        let commentsButton = UIBarButtonItem(title: "Комментарии", style: .plain, target: self, action: #selector(commentsButtonAction))
         navigationItem.rightBarButtonItem = commentsButton
     }
+    
+    @objc func commentsButtonAction(){
+        print("commentsButtonAction")
+        show(CommentsVC(post), sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
