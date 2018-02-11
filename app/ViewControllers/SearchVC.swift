@@ -33,8 +33,11 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         super.viewDidLoad()
         setupViews()
         
-        searchBar.placeholder = "Search"
+        searchBar.placeholder = "Поиск"
+        searchBar.tintColor = .white
+        searchBar.barTintColor = .white
         let leftNavBarButton = UIBarButtonItem(customView:searchBar)
+        leftNavBarButton.tintColor = .white
         self.navigationItem.leftBarButtonItem = leftNavBarButton
         searchBar.delegate = self
         
