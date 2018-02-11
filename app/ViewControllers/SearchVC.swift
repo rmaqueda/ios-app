@@ -33,13 +33,13 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         let leftNavBarButton = UIBarButtonItem(customView:searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
         searchBar.delegate = self
+        
+        search("")
     }
     
     func setupViews(){
-        view.addSubview(loadingIndicator)
+        self.hideKeyboardWhenTappedAround()
         
-        loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         let layout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
@@ -48,6 +48,7 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         layout.minimumLineSpacing = 10
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .white
         
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(CommentCell.self, forCellWithReuseIdentifier: commentCellIdentifier)
@@ -61,6 +62,11 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        view.addSubview(loadingIndicator)
+        
+        loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         self.navigationItem.title = "Поиск"
     }
@@ -98,9 +104,14 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("searchBarSearchButtonClicked", searchBar.text)
+        search(searchBar.text!)
+    }
+    
+    func search(_ string: String){
         users.removeAll()
         collectionView.reloadData()
-        let params : Parameters = ["searchstring": searchBar.text!]
+        loadingIndicator.startAnimating()
+        let params : Parameters = ["q": string]
         Alamofire.request("http://pluma.me/user/search", parameters: params).responseJSON{(response) in
             self.print(response.value)
             self.print(response.request?.url)
@@ -110,6 +121,7 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
                 self.users.append(user)
             }
             self.collectionView.reloadData()
+            self.loadingIndicator.stopAnimating()
         }
     }
     
@@ -118,7 +130,6 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
         print("selectedScopeButtonIndexDidChange", searchBar.text)
     }
 }
