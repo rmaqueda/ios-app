@@ -9,12 +9,12 @@
 import Foundation
 
 class Comment {
-    let user_id: Int!
+    let user: User!
     let text: String!
     let date: String!
     
-    init(user_id: Int, text: String, date: String){
-        self.user_id = user_id
+    init(user: User, text: String, date: String){
+        self.user = user
         self.text = text
         self.date = date
     }

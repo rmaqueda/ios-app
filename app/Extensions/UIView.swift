@@ -7,23 +7,6 @@
 import UIKit
 
 extension UIView {
-    func addShadow() {
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOpacity = 0.25
-        self.layer.shadowOffset = CGSize(width: 1, height: 1)
-        self.layer.shadowRadius = 2
-    }
-    /*
-     func setShadow(bounds: Bool, radius: CGFloat, opacity: Float, color: UIColor, offset: CGSize) {
-     let shadowPath = UIBezierPath(rect: layer.bounds)
-     layer.masksToBounds = bounds
-     layer.shadowRadius = radius
-     layer.shadowOpacity = opacity
-     layer.shadowColor = color.cgColor
-     layer.shadowOffset = offset
-     layer.shadowPath = shadowPath.cgPath
-     }*/
     func addGradient(_ colors: [CGColor], _ locations: [NSNumber], _ startPoint: CGPoint, _ endPoint: CGPoint) {
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
@@ -34,24 +17,15 @@ extension UIView {
         gradient.locations = locations
         self.layer.insertSublayer(gradient, at: 0)
     }
+    
     func addGradient(_ colors: [CGColor], _ startPoint: CGPoint, _ endPoint: CGPoint) {
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
-        //gradient.cornerRadius = self.layer.cornerRadius
         gradient.colors = colors
         gradient.startPoint = startPoint
         gradient.endPoint = endPoint
         self.layer.insertSublayer(gradient, at: 0)
     }
-    
-    /*
-     func setupGradientLayer(location: NSNumber, color1: UIColor, color2: UIColor, inView: UIView) {
-     let gradientLayer = CAGradientLayer()
-     gradientLayer.locations = [location]
-     gradientLayer.colors = [color2.cgColor, color1.cgColor]
-     gradientLayer.frame = inView.bounds
-     inView.layer.insertSublayer(gradientLayer, at: 0)
-     }*/
     
     func makeCircle(){
         layer.cornerRadius = self.frame.height / 2

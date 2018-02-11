@@ -61,7 +61,9 @@ class CommentsVC: UIViewController, UICollectionViewDataSource, UICollectionView
             
             let items = (response.value as! [String: Any])["comments"] as! [[String: Any]]
             for item in items {
-                let comment = Comment(user_id: item["user_id"] as! Int, text: item["text"] as! String, date: item["date"] as! String)
+                let userItem = item["user"] as! [String: Any]
+                let user = User(id: userItem["id"] as! Int, first_name: userItem["first_name"] as? String, last_name: userItem["last_name"] as? String, username: userItem["username"] as? String, photo_url: userItem["photo_url"] as? String, sex: (userItem["sex"] as! String), age: userItem["age"] as? String, prof: "", about: userItem["info"] as? String)
+                let comment = Comment(user: user, text: item["text"] as! String, date: item["date"] as! String)
                 self.comments.append(comment)
                 self.loadingIndicator.stopAnimating()
                 self.collectionView.reloadData()
@@ -150,7 +152,7 @@ class CommentsVC: UIViewController, UICollectionViewDataSource, UICollectionView
             if response.value != nil {
                 self.print(response.value!)
                 self.print(response.request!.url ?? "")
-                let comment = Comment(user_id: (UserData.instance.user?.id)!, text: self.commentTextView.text, date: "now")
+                let comment = Comment(user: UserData.instance.user!, text: self.commentTextView.text, date: "now")
                 self.comments.append(comment)
                 self.collectionView.reloadData()
                 self.commentTextView.text = ""
@@ -174,15 +176,25 @@ class CommentsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellIdentifier, for: indexPath) as! CommentCell
         cell.isUserInteractionEnabled = true
         cell.tag = indexPath.row
-        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(commentClickAction)))
+        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userClickAction)))
         cell.text.text = comments[indexPath.row].text
         cell.date.text = comments[indexPath.row].date
-        cell.name.text = String(comments[indexPath.row].user_id)
-        //cell.text.text = comments[indexPath.row].title
+        cell.name.text = comments[indexPath.row].user.username
+        cell.name.isUserInteractionEnabled = true
+        cell.name.tag = indexPath.row
+        cell.name.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userClickAction)))
+        if comments[indexPath.row].user.photo_url != nil && !comments[indexPath.row].user.photo_url!.isEmpty {
+            cell.image.load(comments[indexPath.row].user.photo_url!)
+        }
+        cell.image.isUserInteractionEnabled = true
+        cell.image.tag = indexPath.row
+        cell.image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userClickAction)))
+        
         return cell
     }
     
-    @objc func commentClickAction(_ sender: UITapGestureRecognizer){
+    @objc func userClickAction(_ sender: UITapGestureRecognizer){
+        show(UserVC(comments[(sender.view?.tag)!].user), sender: self)
     }
 }
 
@@ -257,40 +269,5 @@ class CommentCell : UICollectionViewCell {
         
         date.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         date.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        /*
-         moreButton.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 10).isActive = true
-         moreButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10).isActive = true
-         
-         unlikeButton.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -14).isActive = true
-         unlikeButton.bottomAnchor.constraint(equalTo: moreButton.bottomAnchor).isActive = true
-         
-         likeButton.trailingAnchor.constraint(equalTo: unlikeButton.leadingAnchor, constant: -10).isActive = true
-         likeButton.bottomAnchor.constraint(equalTo: unlikeButton.bottomAnchor).isActive = true
-         
-         recordButton.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
-         recordButton.centerYAnchor.constraint(equalTo: likeButton.centerYAnchor).isActive = true
-         recordButton.widthAnchor.constraint(equalToConstant: 90).isActive = true
-         
-         separator.leadingAnchor.constraint(equalTo: cardView.leadingAnchor).isActive = true
-         separator.trailingAnchor.constraint(equalTo: cardView.trailingAnchor).isActive = true
-         separator.bottomAnchor.constraint(equalTo: moreButton.topAnchor, constant: -13).isActive = true
-         separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
-         
-         timeLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -14).isActive = true
-         timeLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 14).isActive = true
-         
-         photoView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 12).isActive = true
-         photoView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 12).isActive = true
-         photoView.widthAnchor.constraint(equalToConstant: 32).isActive = true
-         photoView.heightAnchor.constraint(equalToConstant: 32).isActive = true
-         
-         nameLabel.leadingAnchor.constraint(equalTo: photoView.trailingAnchor, constant: 10).isActive = true
-         nameLabel.centerYAnchor.constraint(equalTo: photoView.centerYAnchor).isActive = true
-         
-         label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-         label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-         label.centerYAnchor.constraint(equalTo: cardView.centerYAnchor).isActive = true
-         label.topAnchor.constraint(equalTo: photoView.bottomAnchor).isActive = true
-         */
     }
 }

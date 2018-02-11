@@ -33,28 +33,27 @@ class NavigationVC: UITabBarController, UITabBarControllerDelegate {
         
         // 1
         let tabOne = UINavigationController(rootViewController: NewsVC())
-        var imageOne = #imageLiteral(resourceName: "news")
 
     
-        let tabOneBarItem = UITabBarItem(title: "News", image: nil, selectedImage: UIImage(named: "selectedImage.png"))
+        let tabOneBarItem = UITabBarItem(title: "Новости", image: #imageLiteral(resourceName: "news gray"), selectedImage: #imageLiteral(resourceName: "news purple"))
         tabOne.tabBarItem = tabOneBarItem
         
         
         // 2
-        let tabTwo = UINavigationController(rootViewController: SearchVC(UserData.instance.user!))
-        let tabTwoBarItem2 = UITabBarItem(title: "Tab 2", image: UIImage(named: "defaultImage2.png"), selectedImage: UIImage(named: "selectedImage2.png"))
+        let tabTwo = UINavigationController(rootViewController: SearchVC())
+        let tabTwoBarItem2 = UITabBarItem(title: "Поиск", image: #imageLiteral(resourceName: "search gray"), selectedImage: #imageLiteral(resourceName: "search purple"))
         
         tabTwo.tabBarItem = tabTwoBarItem2
         
         // 3
-        let tabThree = UINavigationController(rootViewController: CnannelsVC())
-        let tabThreeBarItem = UITabBarItem(title: "Tab 3", image: UIImage(named: "defaultImage.png"), selectedImage: UIImage(named: "selectedImage.png"))
+        let tabThree = UINavigationController(rootViewController: ChannelsVC())
+        let tabThreeBarItem = UITabBarItem(title: "Каналы", image: #imageLiteral(resourceName: "channels gray"), selectedImage: #imageLiteral(resourceName: "channel purple"))
         
         tabThree.tabBarItem = tabThreeBarItem
         
         // 4
         let tabFour = UINavigationController(rootViewController: UserVC(UserData.instance.user!))
-        let tabFourBarItem = UITabBarItem(title: "User", image: UIImage(named: "defaultImage.png"), selectedImage: UIImage(named: "selectedImage.png"))
+        let tabFourBarItem = UITabBarItem(title: "Профиль", image: #imageLiteral(resourceName: "profile gray"), selectedImage: #imageLiteral(resourceName: "profile purple"))
         
         tabFour.tabBarItem = tabFourBarItem
         

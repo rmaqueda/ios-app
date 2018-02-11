@@ -164,6 +164,13 @@ class UserVC: UIViewController {
         editButton.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: 15).isActive = true
         editButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
         
+        if !isSelfProfile {
+            editButton.isHidden = true
+        }
+        else {
+            writeButton.isHidden = true
+        }
+        
         sexLabel.leadingAnchor.constraint(equalTo: editButton.leadingAnchor).isActive = true
         sexLabel.topAnchor.constraint(equalTo: editButton.bottomAnchor, constant: 20).isActive = true
         

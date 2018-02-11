@@ -40,14 +40,6 @@ class NewsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                 self.loadingIndicator.stopAnimating()
             }
         }
-        //let parameters: Parameters = ["url": "http://telegra.ph/gosha-ili-geiorgiy-02-10", "user_id" : UserData.instance.user!.id]
-        
-        /*
-        Alamofire.request("http://pluma.me/post?url=http://telegra.ph/gosha-ili-geiorgiy-02-10&user_id=" + String(describing: UserData.instance.user!.id!) , method: .put).responseJSON { (response) in
-            self.print(response.value)
-            self.print(response.request?.url)
-        }
-        */
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,6 +78,9 @@ class NewsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         view.addSubview(loadingIndicator)
         loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        let addButton = UIBarButtonItem(title: "Добавить", style: .plain, target: self, action: #selector(addButtonAction))
+        navigationItem.rightBarButtonItem = addButton
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -106,7 +101,15 @@ class NewsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         cell.tag = indexPath.row
         cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(postClickAction)))
         cell.text.text = posts[indexPath.row].title
+        if posts[indexPath.row].imgUrl != nil && !posts[indexPath.row].imgUrl!.isEmpty {
+            cell.image.load(posts[indexPath.row].imgUrl!)
+        }
         return cell
+    }
+    
+    @objc func addButtonAction(){
+        print("addButtonAction")
+        show(AddVC(), sender: self)
     }
     
     @objc func postClickAction(_ sender: UITapGestureRecognizer){
