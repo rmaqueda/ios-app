@@ -9,10 +9,15 @@
 import UIKit
 import Alamofire
 
-class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UISearchBarDelegate {
     let commentCellIdentifier = "cardCellIdentifier"
+    lazy var searchBar: UISearchBar = {
+        var searchBar = UISearchBar(frame: CGRect(x:0,y: 0, width:200, height:20))
+        searchBar.searchBarStyle = .minimal
+        return searchBar
+    }()
     var collectionView: UICollectionView!
-    var channels : [Channel] = []
+    var users : [User] = []
     var loadingIndicator : UIActivityIndicatorView = {
         var view = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -24,20 +29,10 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         super.viewDidLoad()
         setupViews()
         
-        Alamofire.request("http://pluma.me/chat/").responseJSON{(response) in
-            self.print(response.value)
-            self.print(response.request?.url)
-            /*
-             let items = (response.value as! [String: Any])["comments"] as! [[String: Any]]
-             for item in items {
-             let userItem = item["user"] as! [String: Any]
-             let user = User(id: userItem["id"] as! Int, first_name: userItem["first_name"] as? String, last_name: userItem["last_name"] as? String, username: userItem["username"] as? String, photo_url: userItem["photo_url"] as? String, sex: (userItem["sex"] as! String), age: userItem["age"] as? String, prof: "", about: userItem["info"] as? String)
-             let comment = Comment(user: user, text: item["text"] as! String, date: item["date"] as! String)
-             self.comments.append(comment)
-             self.loadingIndicator.stopAnimating()
-             self.collectionView.reloadData()
-             }*/
-        }
+        searchBar.placeholder = "Search"
+        let leftNavBarButton = UIBarButtonItem(customView:searchBar)
+        self.navigationItem.leftBarButtonItem = leftNavBarButton
+        searchBar.delegate = self
     }
     
     func setupViews(){
@@ -74,8 +69,8 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return 5
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return users.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -84,9 +79,46 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellIdentifier, for: indexPath) as! CommentCell
+        let index = indexPath.row
+        if users[index].photo_url != nil && !users[index].photo_url!.isEmpty {
+            cell.image.load(users[index].photo_url!)
+        }
+        cell.name.font = .bold20
+        cell.name.text = users[index].username
+        cell.text.text = (users[index].first_name ?? "") + " " + (users[index].last_name ?? "")
+        cell.isUserInteractionEnabled = true
+        cell.tag = index
+        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userClickAction)))
         return cell
     }
     
     @objc func userClickAction(_ sender: UITapGestureRecognizer){
+        show(UserVC(users[sender.view!.tag]), sender: self)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("searchBarSearchButtonClicked", searchBar.text)
+        users.removeAll()
+        collectionView.reloadData()
+        let params : Parameters = ["searchstring": searchBar.text!]
+        Alamofire.request("http://pluma.me/user/search", parameters: params).responseJSON{(response) in
+            self.print(response.value)
+            self.print(response.request?.url)
+            let items = response.value as! [[String: Any]]
+            for item in items {
+                let user = User(id: item["id"] as! Int, first_name: item["first_name"] as? String, last_name: item["last_name"] as? String, username: item["username"] as? String, photo_url: item["photo_url"] as? String, sex: item["sex"] as? String, age: item["age"] as? String, prof: "", about: item["info"] as? String)
+                self.users.append(user)
+            }
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        print("searchBarSearchButtonClicked", searchBar.text)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+        print("selectedScopeButtonIndexDidChange", searchBar.text)
     }
 }
