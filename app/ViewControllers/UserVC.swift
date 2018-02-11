@@ -108,7 +108,7 @@ class UserVC: UIViewController {
         profLabel.text! += " " + (user.prof == nil ? "" : user.prof!)
         aboutLabel.text! += " " + (user.about == nil ? "" : user.about!)
         
-        if user.photo_url != nil {
+        if user.photo_url != nil && !user.photo_url!.isEmpty {
             photoView.load(user.photo_url!)
         } else {
             photoView.image = #imageLiteral(resourceName: "template")
@@ -189,7 +189,6 @@ class UserVC: UIViewController {
     
     @objc func userTapAction(){
         print("userTapAction")
-        //show(UserVC(profile), sender: self)
     }
     
     @objc func editButtonAction(){
