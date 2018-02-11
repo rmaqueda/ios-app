@@ -59,14 +59,16 @@ class CommentsVC: UIViewController, UICollectionViewDataSource, UICollectionView
             self.print(response.value)
             self.print(response.request?.url)
             
-            let items = (response.value as! [String: Any])["comments"] as! [[String: Any]]
-            for item in items {
-                let userItem = item["user"] as! [String: Any]
-                let user = User(id: userItem["id"] as! Int, first_name: userItem["first_name"] as? String, last_name: userItem["last_name"] as? String, username: userItem["username"] as? String, photo_url: userItem["photo_url"] as? String, sex: (userItem["sex"] as! String), age: userItem["age"] as? String, prof: "", about: userItem["info"] as? String)
-                let comment = Comment(user: user, text: item["text"] as! String, date: item["date"] as! String)
-                self.comments.append(comment)
-                self.loadingIndicator.stopAnimating()
-                self.collectionView.reloadData()
+            if response.value != nil {
+                let items = (response.value as! [String: Any])["comments"] as! [[String: Any]]
+                for item in items {
+                    let userItem = item["user"] as! [String: Any]
+                    let user = User(id: userItem["id"] as! Int, first_name: userItem["first_name"] as? String, last_name: userItem["last_name"] as? String, username: userItem["username"] as? String, photo_url: userItem["photo_url"] as? String, sex: (userItem["sex"] as! String), age: userItem["age"] as? String, prof: "", about: userItem["info"] as? String)
+                    let comment = Comment(user: user, text: item["text"] as! String, date: item["date"] as! String)
+                    self.comments.append(comment)
+                    self.loadingIndicator.stopAnimating()
+                    self.collectionView.reloadData()
+                }
             }
         }
     }
@@ -126,7 +128,7 @@ class CommentsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.register(CommentCell.self, forCellWithReuseIdentifier: commentCellIdentifier)
+        collectionView.register(CommonCell.self, forCellWithReuseIdentifier: commentCellIdentifier)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -173,16 +175,16 @@ class CommentsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellIdentifier, for: indexPath) as! CommentCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellIdentifier, for: indexPath) as! CommonCell
         cell.isUserInteractionEnabled = true
         cell.tag = indexPath.row
         cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userClickAction)))
-        cell.text.text = comments[indexPath.row].text
+        cell.subtitle.text = comments[indexPath.row].text
         cell.date.text = comments[indexPath.row].date
-        cell.name.text = comments[indexPath.row].user.username
-        cell.name.isUserInteractionEnabled = true
-        cell.name.tag = indexPath.row
-        cell.name.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userClickAction)))
+        cell.title.text = comments[indexPath.row].user.username
+        cell.title.isUserInteractionEnabled = true
+        cell.title.tag = indexPath.row
+        cell.title.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userClickAction)))
         if comments[indexPath.row].user.photo_url != nil && !comments[indexPath.row].user.photo_url!.isEmpty {
             cell.image.load(comments[indexPath.row].user.photo_url!)
         }
@@ -195,79 +197,5 @@ class CommentsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     
     @objc func userClickAction(_ sender: UITapGestureRecognizer){
         show(UserVC(comments[(sender.view?.tag)!].user), sender: self)
-    }
-}
-
-class CommentCell : UICollectionViewCell {
-    var image: UIImageView = {
-        var view = UIImageView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.lightGray
-        return view
-    }()
-    
-    var name: UILabel = {
-        var view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.font = .bold14
-        view.textColor = .black
-        return view
-    }()
-    
-    var text: UITextView = {
-        var view = UITextView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.isEditable = false
-        view.isScrollEnabled = false
-        view.backgroundColor = .clear
-        view.textColor = .gray
-        view.textContainer.lineFragmentPadding = 0
-        view.textContainerInset = .zero
-        view.font = .medium16
-        view.isSelectable = false
-        return view
-    }()
-    
-    var date: UILabel = {
-        var view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.font = .medium12
-        view.textColor = .lightGray
-        return view
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        image.makeCircle()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    func setupViews(){
-        addSubview(image)
-        addSubview(text)
-        addSubview(date)
-        addSubview(name)
-        
-        image.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-        image.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        image.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        image.widthAnchor.constraint(equalToConstant: 48).isActive = true
-        
-        name.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 8).isActive = true
-        name.topAnchor.constraint(equalTo: image.topAnchor, constant: 2).isActive = true
-        
-        text.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 8).isActive = true
-        text.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 4).isActive = true
-        
-        date.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        date.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
     }
 }

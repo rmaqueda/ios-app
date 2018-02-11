@@ -60,7 +60,7 @@ class ChannelsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.register(CommentCell.self, forCellWithReuseIdentifier: commentCellIdentifier)
+        collectionView.register(CommonCell.self, forCellWithReuseIdentifier: commentCellIdentifier)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -77,7 +77,7 @@ class ChannelsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        self.navigationItem.title = "Каналы"
+        self.navigationItem.title = "Группы"
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -93,9 +93,9 @@ class ChannelsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellIdentifier, for: indexPath) as! CommentCell
-        cell.name.text = channels[indexPath.row].title
-        cell.name.font = .bold20
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellIdentifier, for: indexPath) as! CommonCell
+        cell.title.text = channels[indexPath.row].title
+        cell.title.font = .bold20
         cell.image.image = #imageLiteral(resourceName: "t_logo")
         cell.isUserInteractionEnabled = true
         cell.tag = indexPath.row

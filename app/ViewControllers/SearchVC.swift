@@ -16,6 +16,10 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         searchBar.searchBarStyle = .minimal
         return searchBar
     }()
+    var pullToRefresh: UIRefreshControl = {
+        var view = UIRefreshControl()
+        return view
+    }()
     var collectionView: UICollectionView!
     var users : [User] = []
     var loadingIndicator : UIActivityIndicatorView = {
@@ -38,30 +42,26 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func setupViews(){
-        self.hideKeyboardWhenTappedAround()
-        
-        
+        //self.hideKeyboardWhenTappedAround()
+        view.backgroundColor = .white
         let layout = UICollectionViewFlowLayout()
-        layout.sectionHeadersPinToVisibleBounds = true
+        //layout.sectionHeadersPinToVisibleBounds = true
         layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         layout.minimumInteritemSpacing = 100
         layout.minimumLineSpacing = 10
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        pullToRefresh.addTarget(self, action: #selector(pullToRefreshAction), for: UIControlEvents.valueChanged)
+        collectionView.addSubview(pullToRefresh)
         collectionView.backgroundColor = .white
         
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.register(CommentCell.self, forCellWithReuseIdentifier: commentCellIdentifier)
+        collectionView.showsVerticalScrollIndicator = true
+        collectionView.register(CommonCell.self, forCellWithReuseIdentifier: commentCellIdentifier)
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .white
+        collectionView.isUserInteractionEnabled = true
         view.addSubview(collectionView)
-        
-        collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         view.addSubview(loadingIndicator)
         
@@ -84,18 +84,22 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellIdentifier, for: indexPath) as! CommentCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellIdentifier, for: indexPath) as! CommonCell
         let index = indexPath.row
         if users[index].photo_url != nil && !users[index].photo_url!.isEmpty {
             cell.image.load(users[index].photo_url!)
         }
-        cell.name.font = .bold20
-        cell.name.text = users[index].username
-        cell.text.text = (users[index].first_name ?? "") + " " + (users[index].last_name ?? "")
+        cell.title.font = .bold20
+        cell.title.text = users[index].username
+        cell.subtitle.text = (users[index].first_name ?? "") + " " + (users[index].last_name ?? "")
         cell.isUserInteractionEnabled = true
         cell.tag = index
         cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userClickAction)))
         return cell
+    }
+    
+    @objc func pullToRefreshAction(){
+        search("")
     }
     
     @objc func userClickAction(_ sender: UITapGestureRecognizer){
@@ -123,6 +127,7 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
             }
             self.collectionView.reloadData()
             self.loadingIndicator.stopAnimating()
+            self.pullToRefresh.endRefreshing()
         }
     }
     

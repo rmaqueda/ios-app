@@ -113,6 +113,7 @@ class UserVC: UIViewController {
         }
         
         editButton.addTarget(self, action: #selector(editButtonAction), for: .touchUpInside)
+        writeButton.addTarget(self, action: #selector(writeButtonAction), for: .touchUpInside)
         setupViews()
     }
     

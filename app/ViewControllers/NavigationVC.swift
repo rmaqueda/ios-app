@@ -47,7 +47,7 @@ class NavigationVC: UITabBarController, UITabBarControllerDelegate {
         
         // 3
         let tabThree = UINavigationController(rootViewController: ChannelsVC())
-        let tabThreeBarItem = UITabBarItem(title: "Каналы", image: #imageLiteral(resourceName: "channels gray"), selectedImage: #imageLiteral(resourceName: "channel purple"))
+        let tabThreeBarItem = UITabBarItem(title: "Группы", image: #imageLiteral(resourceName: "channels gray"), selectedImage: #imageLiteral(resourceName: "channel purple"))
         
         tabThree.tabBarItem = tabThreeBarItem
         

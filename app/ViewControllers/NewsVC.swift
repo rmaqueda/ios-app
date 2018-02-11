@@ -20,11 +20,23 @@ class NewsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         view.startAnimating()
         return view
     }()
+    var pullToRefresh : UIRefreshControl = {
+        var view = UIRefreshControl()
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        load()
+    }
+    
+    @objc func load(){
+        print("load")
         Alamofire.request("http://pluma.me/feed").responseJSON { (response) in
+            self.posts.removeAll()
+            self.loadingIndicator.stopAnimating()
+            self.pullToRefresh.endRefreshing()
             if response.error != nil {
                 return
             }
@@ -36,9 +48,8 @@ class NewsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                 self.print(item)
                 let post = Post(id: item["id"] as! Int, url: item["url"] as! String, imgUrl: item["img_url"] as? String, title: item["title"] as! String, comments: [])
                 self.posts.append(post)
-                self.collectionView.reloadData()
-                self.loadingIndicator.stopAnimating()
             }
+            self.collectionView.reloadData()
         }
     }
     
@@ -58,6 +69,8 @@ class NewsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         layout.minimumInteritemSpacing = 100
         layout.minimumLineSpacing = 10
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView.addSubview(pullToRefresh)
+        pullToRefresh.addTarget(self, action: #selector(load), for: UIControlEvents.valueChanged)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         collectionView.showsVerticalScrollIndicator = false
@@ -68,12 +81,7 @@ class NewsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         collectionView.backgroundColor = .white
         view.addSubview(collectionView)
         
-        collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        self.navigationItem.title = "News"
+        self.navigationItem.title = "Новости"
         
         view.addSubview(loadingIndicator)
         loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -103,6 +111,9 @@ class NewsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         cell.text.text = posts[indexPath.row].title
         if posts[indexPath.row].imgUrl != nil && !posts[indexPath.row].imgUrl!.isEmpty {
             cell.image.load(posts[indexPath.row].imgUrl!)
+        }
+        else {
+            cell.image.image = #imageLiteral(resourceName: "template")
         }
         return cell
     }

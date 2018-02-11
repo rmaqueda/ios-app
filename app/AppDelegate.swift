@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         print("application")
         start()
-        UIApplication.shared.statusBarStyle = .lightContent
         //window = UIWindow(frame: UIScreen.main.bounds)
         //window?.makeKeyAndVisible()
         //window?.rootViewController = AuthVC()
