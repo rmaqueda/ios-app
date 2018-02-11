@@ -41,12 +41,6 @@ class UserEditVC: UIViewController {
         label.text = "О себе:"
         return label
     }()
-    
-    var sexPicker : UIPickerView = {
-        var view = UIPickerView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
     /*
     var ageLabel : UILabel = {
         var label = UILabel()
@@ -104,7 +98,6 @@ class UserEditVC: UIViewController {
         view.addSubview(profLabel)
         view.addSubview(aboutLabel)
         view.addSubview(saveButton)
-        view.addSubview(sexPicker)
         
         sexLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
         sexLabel.topAnchor.constraint(equalTo: view.safeTopAnchor, constant: 20).isActive = true
@@ -120,14 +113,12 @@ class UserEditVC: UIViewController {
         
         saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         saveButton.bottomAnchor.constraint(equalTo: view.safeBottomAnchor, constant: -20).isActive = true
-        
-        sexPicker.leadingAnchor.constraint(equalTo: sexLabel.trailingAnchor, constant: 10).isActive = true
-        sexPicker.topAnchor.constraint(equalTo: sexLabel.topAnchor).isActive = true
     }
     
     
     @objc func saveButtonAction(){
         print("saveButtonAction")
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

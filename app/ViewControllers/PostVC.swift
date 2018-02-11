@@ -33,7 +33,7 @@ class PostVC: UIViewController, WKUIDelegate, WKNavigationDelegate {
     
     @objc func commentsButtonAction(){
         print("commentsButtonAction")
-        show(CommentsVC(post), sender: self)
+        show(CommentsVC(post.id), sender: self)
     }
     
     override func viewDidLoad() {
@@ -43,6 +43,16 @@ class PostVC: UIViewController, WKUIDelegate, WKNavigationDelegate {
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
         webView.navigationDelegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     func webView(_: WKWebView, didCommit: WKNavigation!) {

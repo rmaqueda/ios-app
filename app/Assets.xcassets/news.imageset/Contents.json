@@ -3,6 +3,7 @@
     {
       "idiom" : "universal",
       "filename" : "news.png",
+      "compression-type" : "lossless",
       "scale" : "1x"
     },
     {
@@ -11,6 +12,18 @@
     },
     {
       "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
       "scale" : "3x"
     }
   ],

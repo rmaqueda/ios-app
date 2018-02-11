@@ -34,7 +34,7 @@ class NewsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             let arr = response.value as! [[String: Any]]
             for item in arr {
                 self.print(item)
-                let post = Post(url: item["url"] as! String, imgUrl: item["img_url"] as? String, title: item["title"] as! String, comments: [])
+                let post = Post(id: item["id"] as! Int, url: item["url"] as! String, imgUrl: item["img_url"] as? String, title: item["title"] as! String, comments: [])
                 self.posts.append(post)
                 self.collectionView.reloadData()
                 self.loadingIndicator.stopAnimating()

@@ -14,7 +14,7 @@ class UserVC: UIViewController {
     var photoView : UIImageView = {
         var view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.load("https://imgix.ranker.com/user_node_img/50036/1000707993/original/we-both-want-the-same-thing-photo-u1?w=650&q=50&fm=jpg&fit=crop&crop=faces")
+        view.backgroundColor = .lightGray
         return view
     }()
     var nameLabel : UILabel = {
@@ -107,6 +107,10 @@ class UserVC: UIViewController {
         ageLabel.text! += " " + (user.age == nil ? "" : user.age!)
         profLabel.text! += " " + (user.prof == nil ? "" : user.prof!)
         aboutLabel.text! += " " + (user.about == nil ? "" : user.about!)
+        
+        if user.photo_url != nil {
+            photoView.load(user.photo_url!)
+        }
         
         editButton.addTarget(self, action: #selector(editButtonAction), for: .touchUpInside)
         setupViews()
