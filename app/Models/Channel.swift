@@ -11,9 +11,11 @@ import Foundation
 class Channel {
     let url : String!
     let title : String!
+    let imgUrl : String?
     
-    init(url: String, title: String){
+    init(url: String, title: String, imgUrl: String?){
         self.url = url
         self.title = title
+        self.imgUrl = imgUrl
     }
 }

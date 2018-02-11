@@ -30,7 +30,7 @@ class ChannelsVC: UIViewController, UICollectionViewDataSource, UICollectionView
             if response.value != nil {
                 let items = (response.value as! [[String: Any]])
                 for item in items {
-                    let channel = Channel(url: item["url"] as! String, title: item["title"] as! String)
+                    let channel = Channel(url: item["url"] as! String, title: item["title"] as! String, imgUrl: item["img_url"] as? String)
                     self.channels.append(channel)
                 }
             }
@@ -96,7 +96,12 @@ class ChannelsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellIdentifier, for: indexPath) as! CommonCell
         cell.title.text = channels[indexPath.row].title
         cell.title.font = .bold20
-        cell.image.image = #imageLiteral(resourceName: "t_logo")
+        if channels[indexPath.row].imgUrl != nil && !channels[indexPath.row].imgUrl!.isEmpty {
+            cell.image.load(channels[indexPath.row].imgUrl!)
+        }
+        else {
+            cell.image.image = #imageLiteral(resourceName: "t_logo")
+        }
         cell.isUserInteractionEnabled = true
         cell.tag = indexPath.row
         cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userClickAction)))
