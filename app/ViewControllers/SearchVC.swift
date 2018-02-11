@@ -114,11 +114,12 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         let params : Parameters = ["q": string]
         Alamofire.request("http://pluma.me/user/search", parameters: params).responseJSON{(response) in
             self.print(response.value)
-            self.print(response.request?.url)
-            let items = response.value as! [[String: Any]]
-            for item in items {
-                let user = User(id: item["id"] as! Int, first_name: item["first_name"] as? String, last_name: item["last_name"] as? String, username: item["username"] as? String, photo_url: item["photo_url"] as? String, sex: item["sex"] as? String, age: item["age"] as? String, prof: "", about: item["info"] as? String)
-                self.users.append(user)
+            if response.value != nil {
+                let items = response.value as! [[String: Any]]
+                for item in items {
+                    let user = User(id: item["id"] as! Int, first_name: item["first_name"] as? String, last_name: item["last_name"] as? String, username: item["username"] as? String, photo_url: item["photo_url"] as? String, sex: item["sex"] as? String, age: item["age"] as? String, prof: "", about: item["info"] as? String)
+                    self.users.append(user)
+                }
             }
             self.collectionView.reloadData()
             self.loadingIndicator.stopAnimating()

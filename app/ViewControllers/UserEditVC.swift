@@ -113,6 +113,7 @@ class UserEditVC: UIViewController {
         
         saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         saveButton.bottomAnchor.constraint(equalTo: view.safeBottomAnchor, constant: -20).isActive = true
+        saveButton.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
     }
     
     

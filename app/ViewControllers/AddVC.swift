@@ -83,7 +83,7 @@ class AddVC : UIViewController {
         if url.contains("telegra.ph") {
             let parameters: Parameters = ["url": url, "user_id" : UserData.instance.user!.id]
             
-            Alamofire.request("http://pluma.me/post", method: .put, parameters: parameters, encoding: URLEncoding.queryString).responseJSON { (response) in
+            Alamofire.request("http://pluma.me/post", method: .post, parameters: parameters, encoding: URLEncoding.queryString).responseJSON { (response) in
                 self.print(response.value)
                 self.print(response.request?.url)
             }

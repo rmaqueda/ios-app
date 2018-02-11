@@ -27,10 +27,12 @@ class ChannelsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         Alamofire.request("http://pluma.me/chat").responseJSON{(response) in
             self.print(response.value)
             self.print(response.request?.url)
-            let items = (response.value as! [[String: Any]])
-            for item in items {
-                let channel = Channel(url: item["url"] as! String, title: item["title"] as! String)
-                self.channels.append(channel)
+            if response.value != nil {
+                let items = (response.value as! [[String: Any]])
+                for item in items {
+                    let channel = Channel(url: item["url"] as! String, title: item["title"] as! String)
+                    self.channels.append(channel)
+                }
             }
             self.loadingIndicator.stopAnimating()
             self.collectionView.reloadData()
