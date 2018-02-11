@@ -9,6 +9,10 @@
 import UIKit
 
 class NavigationVC: UITabBarController, UITabBarControllerDelegate {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("hash", UserData.instance.hash!)
@@ -26,41 +30,37 @@ class NavigationVC: UITabBarController, UITabBarControllerDelegate {
     func setupViews(){
         UINavigationBar.appearance().barTintColor = .main
         UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
         self.tabBar.tintColor = .main
-        
-        
+    
         // 1
         let tabOne = UINavigationController(rootViewController: NewsVC())
-
-    
         let tabOneBarItem = UITabBarItem(title: "Новости", image: #imageLiteral(resourceName: "news gray"), selectedImage: #imageLiteral(resourceName: "news purple"))
         tabOne.tabBarItem = tabOneBarItem
-        
         
         // 2
         let tabTwo = UINavigationController(rootViewController: SearchVC())
         let tabTwoBarItem2 = UITabBarItem(title: "Поиск", image: #imageLiteral(resourceName: "search gray"), selectedImage: #imageLiteral(resourceName: "search purple"))
-        
         tabTwo.tabBarItem = tabTwoBarItem2
         
         // 3
         let tabThree = UINavigationController(rootViewController: ChannelsVC())
         let tabThreeBarItem = UITabBarItem(title: "Группы", image: #imageLiteral(resourceName: "channels gray"), selectedImage: #imageLiteral(resourceName: "channel purple"))
-        
         tabThree.tabBarItem = tabThreeBarItem
         
         // 4
         let tabFour = UINavigationController(rootViewController: UserVC(UserData.instance.user!))
         let tabFourBarItem = UITabBarItem(title: "Профиль", image: #imageLiteral(resourceName: "profile gray"), selectedImage: #imageLiteral(resourceName: "profile purple"))
-        
         tabFour.tabBarItem = tabFourBarItem
         
-        
-        self.viewControllers = [ tabOne, tabTwo, tabThree, tabFour]
-        
+        self.viewControllers = [tabOne, tabTwo, tabThree, tabFour]
         self.moreNavigationController.navigationBar.topItem?.rightBarButtonItem = nil
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     // UITabBarControllerDelegate method

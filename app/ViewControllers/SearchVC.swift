@@ -89,6 +89,9 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         if users[index].photo_url != nil && !users[index].photo_url!.isEmpty {
             cell.image.load(users[index].photo_url!)
         }
+        else {
+            cell.image.image = #imageLiteral(resourceName: "template")
+        }
         cell.title.font = .bold20
         cell.title.text = users[index].username
         cell.subtitle.text = (users[index].first_name ?? "") + " " + (users[index].last_name ?? "")

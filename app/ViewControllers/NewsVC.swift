@@ -31,6 +31,7 @@ class NewsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         load()
     }
     
+    
     @objc func load(){
         print("load")
         Alamofire.request("http://pluma.me/feed").responseJSON { (response) in

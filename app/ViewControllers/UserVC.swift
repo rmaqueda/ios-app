@@ -110,6 +110,8 @@ class UserVC: UIViewController {
         
         if user.photo_url != nil {
             photoView.load(user.photo_url!)
+        } else {
+            photoView.image = #imageLiteral(resourceName: "template")
         }
         
         editButton.addTarget(self, action: #selector(editButtonAction), for: .touchUpInside)
