@@ -12,8 +12,10 @@ import Alamofire
 class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UISearchBarDelegate {
     let commentCellIdentifier = "cardCellIdentifier"
     lazy var searchBar: UISearchBar = {
-        var searchBar = UISearchBar(frame: CGRect(x:0,y: 0, width:200, height:20))
+        var searchBar = UISearchBar(frame: CGRect(x:0,y: 0, width:300, height:20))
         searchBar.searchBarStyle = .minimal
+        searchBar.showsCancelButton = true
+        searchBar.enablesReturnKeyAutomatically = false
         return searchBar
     }()
     var pullToRefresh: UIRefreshControl = {
@@ -32,7 +34,6 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        
         searchBar.placeholder = "Поиск"
         searchBar.tintColor = .white
         searchBar.barTintColor = .white
@@ -143,4 +144,10 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         print("selectedScopeButtonIndexDidChange", searchBar.text)
     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("searchBarCancelButtonClicked")
+        searchBar.endEditing(true)
+    }
+    
 }

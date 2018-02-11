@@ -55,11 +55,13 @@ class UserVC: UIViewController {
         label.text = "Специализация:"
         return label
     }()
-    var aboutLabel : UILabel = {
-        var label = UILabel()
+    var aboutLabel : UITextView = {
+        var label = UITextView()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.font = .bold16
+        label.isEditable = false
+        label.isScrollEnabled = false
         label.text = "О себе:"
         return label
     }()
@@ -183,8 +185,9 @@ class UserVC: UIViewController {
         profLabel.leadingAnchor.constraint(equalTo: ageLabel.leadingAnchor).isActive = true
         profLabel.topAnchor.constraint(equalTo: ageLabel.bottomAnchor, constant: 10).isActive = true
         
-        aboutLabel.leadingAnchor.constraint(equalTo: profLabel.leadingAnchor).isActive = true
-        aboutLabel.topAnchor.constraint(equalTo: profLabel.bottomAnchor, constant: 10).isActive = true
+        aboutLabel.leadingAnchor.constraint(equalTo: profLabel.leadingAnchor, constant: -5).isActive = true
+        aboutLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -2).isActive = true
+        aboutLabel.topAnchor.constraint(equalTo: profLabel.bottomAnchor, constant: 0).isActive = true
     }
     
     @objc func userTapAction(){
