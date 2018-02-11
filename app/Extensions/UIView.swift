@@ -10,7 +10,6 @@ extension UIView {
     func addGradient(_ colors: [CGColor], _ locations: [NSNumber], _ startPoint: CGPoint, _ endPoint: CGPoint) {
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
-        //gradient.cornerRadius = self.layer.cornerRadius
         gradient.colors = colors
         gradient.startPoint = startPoint
         gradient.endPoint = endPoint

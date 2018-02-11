@@ -41,31 +41,6 @@ class UserEditVC: UIViewController {
         label.text = "О себе:"
         return label
     }()
-    /*
-    var ageLabel : UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
-        label.font = .bold16
-        label.text = "Возраст:"
-        return label
-    }()
-    var profLabel : UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
-        label.font = .bold16
-        label.text = "Специализация:"
-        return label
-    }()
-    var aboutLabel : UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
-        label.font = .bold16
-        label.text = "О себе:"
-        return label
-    }()*/
     
     var saveButton: UIButton = {
         var button = UIButton()

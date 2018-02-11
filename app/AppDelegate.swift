@@ -10,8 +10,6 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    // id, first_name, last_name, username, photo_url, auth_date and hash
     var window: UIWindow?
 
 
@@ -19,9 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         print("application")
         start()
-        //window = UIWindow(frame: UIScreen.main.bounds)
-        //window?.makeKeyAndVisible()
-        //window?.rootViewController = AuthVC()
         UIApplication.shared.statusBarStyle = .lightContent
         return true
     }

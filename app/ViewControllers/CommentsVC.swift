@@ -28,8 +28,6 @@ class CommentsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         var button = UIButton(type: UIButtonType.system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("отпр.", for: .normal)
-        //button.setTitleColor(.black, for: .normal)
-        //button.backgroundColor = .clear
         button.titleLabel?.font = .bold16
         return button
     }()

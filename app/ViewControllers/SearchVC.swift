@@ -45,7 +45,6 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         //self.hideKeyboardWhenTappedAround()
         view.backgroundColor = .white
         let layout = UICollectionViewFlowLayout()
-        //layout.sectionHeadersPinToVisibleBounds = true
         layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         layout.minimumInteritemSpacing = 100
         layout.minimumLineSpacing = 10
